@@ -1,0 +1,13 @@
+Sale Tab ----------------------------------------------------------------------
+[botones a inluir]
+
+ins Varios, Art Comun, Buscar[boton con windows modal], mayoreo, entradas, salidas, borrar articulo
+
+[ins varios] agrega un articulo via codigo por cantidad
+[art comun], agrega un articulo que no esta en inventario, con la posibilidad de agregarlo
+
+[qtabwidget] 
+con una [qtable] y posiblidad de agregar mas pestañas
+
+la tabla tendra;
+codigo de barras, descr del producto, precio venta, cantidad, importe, existencia

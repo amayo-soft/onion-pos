@@ -1,0 +1,42 @@
+/* TABS */
+QLabel#lbl_code
+{
+  color: #273CF5;
+}
+
+
+QPushButton#search_btn {
+    color: white;
+    background-color: #2563eb;
+    padding: 6px 12px;
+    height: 25px;
+    border: 1px solid #1d4ed8;
+    border-radius: 5px;
+}
+
+QPushButton#search_btn:hover {
+    background-color: #3b82f6;
+    border-color: #1d4ed8;
+}
+
+QPushButton#search_btn:pressed {
+    background-color: #1d4ed8;
+}
+
+/* GENERAL */
+QToolBar {
+  padding: 10px;
+}
+
+QLineEdit {
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 4px 8px;
+    background-color: #ffffff;
+    selection-background-color: #3b82f6;
+    color: black;
+}
+
+QLineEdit:focus {
+    border-color: #3b82f6;
+}

@@ -1,4 +1,12 @@
 <RCC>
     <qresource prefix="/">
+      <file>res/sale.svg</file>
+      <file>res/client.svg</file>
+      <file>res/inventory.svg</file>
+      <file>res/product.svg</file>
+      <file>res/report.svg</file>
+      <file>res/settings.svg</file>
+      <file>res/search.svg</file>
+      <file>res/style.qss</file>
     </qresource>
 </RCC>
