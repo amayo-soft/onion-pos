@@ -13,7 +13,7 @@ auto MainWindow::tab_info() -> std::array<TabInfo, 6>
                 .tab = new Sale(nullptr),
             },
             TabInfo{
-                .name = QString("Cliente"),
+
                 .icon = QIcon(":res/client.svg"),
                 .tab = new Client(nullptr),
             },
@@ -45,7 +45,7 @@ MainWindow::~MainWindow() = default;
 
 auto MainWindow::build_window() -> void
 {
-    this->setWindowTitle("Punto de Venta");
+    this->setWindowTitle("onion");
     this->setFixedSize(QSize(1280, 720));
     build_tab_bar();
 }
