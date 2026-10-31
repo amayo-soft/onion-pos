@@ -13,7 +13,7 @@ auto MainWindow::tab_info() -> std::array<TabInfo, 6>
                 .tab = new Sale(nullptr),
             },
             TabInfo{
-
+                .name = QString("Cliente"),
                 .icon = QIcon(":res/client.svg"),
                 .tab = new Client(nullptr),
             },

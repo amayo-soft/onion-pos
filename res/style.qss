@@ -1,0 +1,37 @@
+/* TABS */
+QPushButton#search_btn {
+    background-color: #2563eb;
+    padding: 6px 12px;
+}
+
+QPushButton#search_btn:hover {
+    background-color: #3b82f6;
+    border-color: #1d4ed8;
+}
+
+QPushButton#search_btn:pressed {
+    background-color: #1d4ed8;
+}
+
+/* GENERAL */
+QPushButton:flat
+{
+  border: none;
+}
+
+QToolBar {
+  padding: 10px;
+}
+
+QLineEdit {
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 4px 8px;
+    background-color: #ffffff;
+    selection-background-color: #3b82f6;
+    color: black;
+}
+
+QLineEdit:focus {
+    border-color: #3b82f6;
+}

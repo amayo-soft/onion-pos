@@ -4,11 +4,9 @@
 #include <QHBoxLayout>
 #include <QLineEdit>
 #include <QPointer>
+#include <QPushButton>
 #include <QToolBar>
 #include <QVBoxLayout>
-#include <concepts>
-
-// #include <type_traits>
 
 /* Tabs class */
 class Tab; // Base Class
@@ -18,19 +16,6 @@ class Client;
 class Product;
 class Configuration;
 class Report;
-
-// space for templates with concepts
-namespace Type
-{
-    /* template <typename T>
-     concept Layout = std::same_as<std::remove_pointer_t<T>, QVBoxLayout> ||
-                      std::same_as<std::remove_pointer_t<T>, QHBoxLayout>;
-     */
-
-    template <typename T>
-    concept Layout = std::same_as<T, QVBoxLayout> || std::same_as<T, QHBoxLayout>;
-
-} // namespace Type
 
 class Tab
 {
@@ -42,10 +27,6 @@ class Tab
     virtual auto set_layout() -> void = 0;  // Set the layout
     virtual auto set_binding() -> void = 0; // bind widget with their custom action
     virtual auto set_button() -> void = 0;  // no need explaination
-
-    virtual auto set_entry() -> void {}     // all fields that wait for an input
-    virtual auto set_container() -> void {} // could`ve a tabBar, Pane, Scroll View
-    virtual auto set_popup() -> void {}
 };
 
 class Sale : protected Tab, public QFrame
@@ -68,7 +49,10 @@ class Sale : protected Tab, public QFrame
     QPointer<QVBoxLayout> center = nullptr;
     QPointer<QVBoxLayout> footer = nullptr;
     QPointer<QToolBar> tool_bar = nullptr;
+    /* Controls */
     QPointer<QLineEdit> search = nullptr;
+
+    QPointer<QPushButton> search_btn = nullptr;
 };
 
 class Client : protected Tab, public QFrame

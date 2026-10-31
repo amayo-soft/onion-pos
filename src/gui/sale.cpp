@@ -30,11 +30,9 @@ auto Sale::set_layout() -> void
     QPointer<QFrame> header_container = new QFrame();
     QPointer<QFrame> footer_container = new QFrame();
 
-    header_container->setStyleSheet("QFrame { border: 1px solid gray }");
-    footer_container->setStyleSheet("QFrame { border: 1px solid gray }");
-
     build_tool_bar(header_container);
     build_search_bar();
+    set_button();
 
     header->addWidget(header_container);
     footer->addWidget(footer_container);
@@ -47,7 +45,6 @@ auto Sale::build_tool_bar(QFrame *parent) -> void
 
     tool_bar = new QToolBar(parent);
     tool_bar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-    tool_bar->setStyleSheet("QToolBar{padding: 10px}");
 }
 
 auto Sale::build_search_bar() -> void
@@ -58,11 +55,19 @@ auto Sale::build_search_bar() -> void
     search = new QLineEdit();
     search->addAction(QIcon(":res/search.svg"), QLineEdit::LeadingPosition);
     search->setPlaceholderText("Buscar...");
-    search->setStyleSheet("QLineEdit { background-color: white; color: black}");
-    search->setFixedSize(400, 30);
+    search->setFixedSize(600, 30);
 
     tool_bar->addWidget(search);
 }
 
+auto Sale::set_button() -> void
+{
+    if (!tool_bar || !header || !center || !footer)
+        return;
+
+    search_btn = new QPushButton(QIcon(":res/search.svg"), "Buscar");
+    search_btn->setFixedWidth(150);
+    search_btn->setObjectName("search_btn"); // Identifier for style
+    tool_bar->addWidget(search_btn);
+}
 auto Sale::set_binding() -> void {}
-auto Sale::set_button() -> void {}
