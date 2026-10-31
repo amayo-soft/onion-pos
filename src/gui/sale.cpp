@@ -34,6 +34,24 @@ auto Sale::set_layout() -> void
     build_search_bar();
     set_button();
 
+    /* TOOLBAR LAYOUTS -------------------------------------------------------------------------*/
+    QPointer<QFrame> tool_bar_frame = new QFrame();
+    QPointer<QHBoxLayout> h_layout = new QHBoxLayout();
+
+    QPointer<QLabel> lbl = new QLabel("Codigo del Producto:");
+    lbl->setObjectName("lbl_code");
+
+    h_layout->addWidget(lbl, 0, Qt::AlignLeft);
+    h_layout->addWidget(search);
+
+    tool_bar_frame->setLayout(h_layout);
+    /* END TOOLBAR LAYOUT ------------------------------------------------------------------*/
+
+    /* TOOLBAR ADD WIDGET -----------------------------------------------------------------*/
+    tool_bar->addWidget(tool_bar_frame);
+    tool_bar->addWidget(search_btn);
+
+    /* END */
     header->addWidget(header_container);
     footer->addWidget(footer_container);
 }
@@ -55,9 +73,7 @@ auto Sale::build_search_bar() -> void
     search = new QLineEdit();
     search->addAction(QIcon(":res/search.svg"), QLineEdit::LeadingPosition);
     search->setPlaceholderText("Buscar...");
-    search->setFixedSize(600, 30);
-
-    tool_bar->addWidget(search);
+    search->setFixedSize(600, 35);
 }
 
 auto Sale::set_button() -> void
@@ -68,6 +84,5 @@ auto Sale::set_button() -> void
     search_btn = new QPushButton(QIcon(":res/search.svg"), "Buscar");
     search_btn->setFixedWidth(150);
     search_btn->setObjectName("search_btn"); // Identifier for style
-    tool_bar->addWidget(search_btn);
 }
 auto Sale::set_binding() -> void {}

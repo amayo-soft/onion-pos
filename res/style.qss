@@ -1,7 +1,17 @@
 /* TABS */
+QLabel#lbl_code
+{
+  color: #273CF5;
+}
+
+
 QPushButton#search_btn {
+    color: white;
     background-color: #2563eb;
     padding: 6px 12px;
+    height: 25px;
+    border: 1px solid #1d4ed8;
+    border-radius: 5px;
 }
 
 QPushButton#search_btn:hover {
@@ -14,11 +24,6 @@ QPushButton#search_btn:pressed {
 }
 
 /* GENERAL */
-QPushButton:flat
-{
-  border: none;
-}
-
 QToolBar {
   padding: 10px;
 }

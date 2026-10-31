@@ -2,6 +2,7 @@
 
 #include <QFrame>
 #include <QHBoxLayout>
+#include <QLabel>
 #include <QLineEdit>
 #include <QPointer>
 #include <QPushButton>
@@ -49,6 +50,7 @@ class Sale : protected Tab, public QFrame
     QPointer<QVBoxLayout> center = nullptr;
     QPointer<QVBoxLayout> footer = nullptr;
     QPointer<QToolBar> tool_bar = nullptr;
+
     /* Controls */
     QPointer<QLineEdit> search = nullptr;
 
