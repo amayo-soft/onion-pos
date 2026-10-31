@@ -10,13 +10,8 @@ on:
 jobs:
   formatting-check:
     name: Formatting Check
+
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        path:
-          - exclude: "extern"
-          - exclude: "external"
-          - exclude: "3rdparty"
 
     steps:
       - uses: actions/checkout@v4
@@ -24,7 +19,7 @@ jobs:
         uses: jidicula/clang-format-action@v4.18.0
         with:
           fallback-style: "GNU"
-          exclude-regex: ${{ matrix.path['exclude'] }}
+          exclude-regex: "extern, external, 3rdparty"
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4.1.2
