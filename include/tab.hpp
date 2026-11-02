@@ -7,6 +7,7 @@
 #include <QList>
 #include <QPointer>
 #include <QPushButton>
+#include <QTabWidget>
 #include <QToolBar>
 #include <QVBoxLayout>
 
@@ -59,17 +60,17 @@ class Sale : protected Tab, public QFrame
 
   private:
     auto build_search_bar() -> void;
-    auto build_tool_bar(QFrame *parent) -> void;
+    auto build_tool_bar(QVBoxLayout *parent) -> void;
+    auto build_ticket(QVBoxLayout *parent) -> void;
 
-#ifdef DISABLED
-    auto set_tooltip() -> void;
-#else
+#ifndef DISABLED
     auto set_tooltip() -> void override;
+#else
+    auto set_tooltip() -> void;
 #endif
 
-    QPointer<QVBoxLayout> header = nullptr;
-    QPointer<QVBoxLayout> center = nullptr;
-    QPointer<QVBoxLayout> footer = nullptr;
+    QPointer<QVBoxLayout> main_layout = nullptr;
+    QPointer<QTabWidget> tickets = nullptr;
     QPointer<QToolBar> tool_bar = nullptr;
 
     Widget::Button tb_btn_list; // toolbar btn list

@@ -1,6 +1,7 @@
 #include "tab.hpp"
 
 #include <QIcon>
+#include <QTabBar>
 
 Sale::Sale(QFrame *tab_parent) : QFrame(tab_parent) { build_tab(); }
 
@@ -8,15 +9,7 @@ Sale::~Sale() = default;
 
 auto Sale::build_tab() -> void
 {
-    QPointer<QVBoxLayout> main_layout = new QVBoxLayout(this);
-
-    header = new QVBoxLayout();
-    center = new QVBoxLayout();
-    footer = new QVBoxLayout();
-
-    main_layout->addLayout(header);
-    main_layout->addLayout(center);
-    main_layout->addLayout(footer);
+    main_layout = new QVBoxLayout(this);
 
     set_layout();
     set_tooltip();
@@ -25,15 +18,13 @@ auto Sale::build_tab() -> void
 
 auto Sale::set_layout() -> void
 {
-    if (!(header || center || footer))
-        return;
+    QPointer<QFrame> main = new QFrame();
+    QPointer<QVBoxLayout> m_layout = new QVBoxLayout();
 
-    QPointer<QFrame> header_container = new QFrame();
-    QPointer<QFrame> footer_container = new QFrame();
-
-    build_tool_bar(header_container);
+    build_tool_bar(m_layout);
     build_search_bar();
     set_button();
+    build_ticket(m_layout);
 
     /* TOOLBAR LAYOUTS -------------------------------------------------------------------------*/
     QPointer<QFrame> tool_bar_frame = new QFrame();
@@ -80,17 +71,32 @@ auto Sale::set_layout() -> void
     tool_bar->addWidget(tool_bar_frame);
 
     /* END */
-    header->addWidget(header_container);
-    footer->addWidget(footer_container);
+
+    main->setLayout(m_layout);
+    main_layout->addWidget(main);
 }
 
-auto Sale::build_tool_bar(QFrame *parent) -> void
+auto Sale::build_tool_bar(QVBoxLayout *parent) -> void
 {
     if (!parent)
         return;
 
-    tool_bar = new QToolBar(parent);
+    tool_bar = new QToolBar();
     tool_bar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    parent->addWidget(tool_bar);
+}
+
+auto Sale::build_ticket(QVBoxLayout *parent) -> void
+{
+    if (!parent)
+        return;
+
+    tickets = new QTabWidget();
+    tickets->addTab(new QFrame, "ticket 1");
+    tickets->setElideMode(Qt::ElideRight);
+    tickets->tabBar()->setExpanding(true);
+    tickets->setTabsClosable(true);
+    parent->addWidget(tickets);
 }
 
 auto Sale::build_search_bar() -> void
@@ -106,7 +112,7 @@ auto Sale::build_search_bar() -> void
 
 auto Sale::set_button() -> void
 {
-    if (!tool_bar || !header || !center || !footer)
+    if (!tool_bar)
         return;
 
     search_btn = new QPushButton(QIcon(":res/search.svg"), "Buscar");
