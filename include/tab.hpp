@@ -48,6 +48,7 @@ class Tab
 
 class Sale : protected Tab, public QFrame
 {
+
   public:
     explicit Sale(QFrame *tab_parent);
     ~Sale() override;
@@ -62,6 +63,8 @@ class Sale : protected Tab, public QFrame
     auto build_search_bar() -> void;
     auto build_tool_bar(QVBoxLayout *parent) -> void;
     auto build_ticket(QVBoxLayout *parent) -> void;
+    auto add_ticket() -> void;
+    auto delete_ticket(int index) -> void;
 
 #ifndef DISABLED
     auto set_tooltip() -> void override;
@@ -87,6 +90,7 @@ class Sale : protected Tab, public QFrame
     QPointer<QPushButton> entry_btn = nullptr;      // money entry
     QPointer<QPushButton> departures_btn = nullptr; // money departures
     QPointer<QPushButton> delete_art_btn = nullptr; // delete article from the table
+    QPointer<QPushButton> new_ticket = nullptr;
 };
 
 class Client : protected Tab, public QFrame

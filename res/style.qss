@@ -57,6 +57,38 @@ QTabBar::tab:disabled {
     color: #808080;
 }
 
+QPushButton#add_ticket_btn {
+    background-color: #e0e0e0; /* Gris claro para alinearse con las pestañas inactivas */
+    color: #000080;            /* Azul marino clásico para destacar el símbolo '+' */
+    border: 1px solid #707070; /* Mismo borde que QTabBar::tab */
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 14px;
+    margin-left: 2px;          /* Separación sutil de la última pestaña */
+}
+
+/* Estado al pasar el cursor (Hover) */
+QPushButton#add_ticket_btn:hover {
+    background-color: #ffffff; /* Fondo blanco similar a la pestaña activa */
+    border-color: #000080;     /* Resalte en azul marino al pasar el mouse */
+    color: #005a9e;
+}
+
+/* Estado al presionar (Pressed) */
+QPushButton#add_ticket_btn:pressed {
+    background-color: #c8c8c8; /* Sensación táctil de hundido */
+    border-color: #404040;
+    color: #000000;
+}
+
+/* Estado deshabilitado (cuando se alcanza el límite de tickets) */
+QPushButton#add_ticket_btn:disabled {
+    background-color: #d4d0c8;
+    color: #808080;
+    border-color: #a0a0a0;
+}
+
+
 /* ==========================================================================
    ETIQUETAS Y CAMPOS DE TEXTO
    ================================================================---------- */

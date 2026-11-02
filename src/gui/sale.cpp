@@ -12,6 +12,7 @@ auto Sale::build_tab() -> void
     main_layout = new QVBoxLayout(this);
 
     set_layout();
+    set_binding();
     set_tooltip();
     this->setLayout(main_layout);
 }
@@ -92,11 +93,52 @@ auto Sale::build_ticket(QVBoxLayout *parent) -> void
         return;
 
     tickets = new QTabWidget();
-    tickets->addTab(new QFrame, "ticket 1");
     tickets->setElideMode(Qt::ElideRight);
-    tickets->tabBar()->setExpanding(true);
+    tickets->tabBar()->setExpanding(false);
     tickets->setTabsClosable(true);
+    tickets->addTab(new QFrame, "Ticket 1");
+
+    new_ticket = new QPushButton("+");
+    new_ticket->setObjectName("add_ticket_btn");
+    new_ticket->setFixedSize(25, 25);
+
+    auto corner_widget = new QWidget();
+    auto corner_layout = new QHBoxLayout(corner_widget);
+    corner_layout->addWidget(new_ticket);
+    corner_layout->setContentsMargins(0, 0, 0, 0);
+    corner_layout->setSpacing(0);
+
+    tickets->setCornerWidget(corner_widget, Qt::TopRightCorner);
+
     parent->addWidget(tickets);
+}
+
+auto Sale::add_ticket() -> void
+{
+#ifndef DISABLED
+    if (tickets->count() >= 10)
+#else
+    if (tickets->count() >= 5)
+#endif
+        return;
+
+    QPointer<QFrame> ticket = new QFrame();
+
+    auto ticket_count = tickets->count() + 1;
+    auto title = QString("Ticket %1").arg(ticket_count);
+
+    tickets->addTab(ticket, title);
+    tickets->setCurrentWidget(ticket);
+}
+auto Sale::delete_ticket(int index) -> void
+{
+    if (tickets->count() <= 1)
+        return;
+
+    auto ticket = tickets->widget(index);
+    tickets->removeTab(index);
+    if (ticket)
+        ticket->deleteLater();
 }
 
 auto Sale::build_search_bar() -> void
@@ -158,4 +200,8 @@ auto Sale::set_tooltip() -> void
     search_product_btn->setToolTip("Buscar Producto en inventario");
     wholesale_btn->setToolTip("Establecer Articulo al por mayor");
 }
-auto Sale::set_binding() -> void {}
+auto Sale::set_binding() -> void
+{
+    QObject::connect(new_ticket, &QPushButton::clicked, this, &Sale::add_ticket);
+    QObject::connect(tickets, &QTabWidget::tabCloseRequested, this, &Sale::delete_ticket);
+}
