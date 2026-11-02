@@ -1,7 +1,6 @@
 #include "tab.hpp"
 
 #include <QIcon>
-#include <qnamespace.h>
 
 Sale::Sale(QFrame *tab_parent) : QFrame(tab_parent) { build_tab(); }
 
@@ -20,6 +19,7 @@ auto Sale::build_tab() -> void
     main_layout->addLayout(footer);
 
     set_layout();
+    set_tooltip();
     this->setLayout(main_layout);
 }
 
@@ -40,11 +40,12 @@ auto Sale::set_layout() -> void
     QPointer<QVBoxLayout> tool_bar_layout = new QVBoxLayout();
     // anonimous space to set layout without care for same var names
     {
-        QPointer<QHBoxLayout> h_layout = new QHBoxLayout();
+        QPointer<QHBoxLayout> h_layout = new QHBoxLayout();  // first row
         QPointer<QHBoxLayout> h2_layout = new QHBoxLayout(); // second row
         QPointer<QVBoxLayout> v_layout = new QVBoxLayout();
 
         h_layout->setAlignment(Qt::AlignLeft);
+        h_layout->setSpacing(5);
         h2_layout->setAlignment(Qt::AlignLeft);
 
         QPointer<QLabel> lbl = new QLabel("Codigo del Producto:");
@@ -62,6 +63,9 @@ auto Sale::set_layout() -> void
             }
             h2_layout->addWidget(btn);
         }
+
+        h_layout->addStretch();
+        h2_layout->addStretch();
 
         v_layout->addLayout(h2_layout);
         tool_bar_layout->addLayout(h_layout);
@@ -105,19 +109,46 @@ auto Sale::set_button() -> void
         return;
 
     search_btn = new QPushButton(QIcon(":res/search.svg"), "Buscar");
-    search_btn->setFixedWidth(150);
+    search_btn->setFixedWidth(100);
     search_btn->setObjectName("search_btn"); // Identifier for style
     tb_btn_list.storage_button(search_btn);
 
     // TOOLBAR SECOND ROW OF BUTTONS
     art_various_btn = new QPushButton("Art. Varios");
-    art_various_btn->setFixedWidth(150);
-    art_various_btn->setProperty("tb", true); // group of buttons for style
     tb_btn_list.storage_button(art_various_btn);
 
     art_common_btn = new QPushButton("Art. Comun");
-    art_common_btn->setFixedWidth(150);
-    art_common_btn->setProperty("tb", true);
     tb_btn_list.storage_button(art_common_btn);
+
+    search_product_btn = new QPushButton(QIcon(":res/search.svg"), "[F3] / Buscar Producto");
+    tb_btn_list.storage_button(search_product_btn);
+
+    wholesale_btn = new QPushButton("Mayoreo");
+    tb_btn_list.storage_button(wholesale_btn);
+
+    entry_btn = new QPushButton("Entrada");
+    tb_btn_list.storage_button(entry_btn);
+
+    departures_btn = new QPushButton("Salida");
+    tb_btn_list.storage_button(departures_btn);
+
+    delete_art_btn = new QPushButton("[Del] / Borrar Producto");
+    tb_btn_list.storage_button(delete_art_btn);
+
+    for (const auto &btn : tb_btn_list.get_button())
+    {
+        if (btn->objectName() != "search_btn")
+        {
+            btn->setProperty("tb", true);
+        }
+    }
+}
+auto Sale::set_tooltip() -> void
+{
+    search_btn->setToolTip("Buscar un Producto");
+    art_various_btn->setToolTip("agregar por cantidad");
+    art_common_btn->setToolTip("agregar producto fuera de inventario");
+    search_product_btn->setToolTip("Buscar Producto en inventario");
+    wholesale_btn->setToolTip("Establecer Articulo al por mayor");
 }
 auto Sale::set_binding() -> void {}

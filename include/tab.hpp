@@ -41,7 +41,7 @@ class Tab
     virtual auto set_button() -> void = 0;  // no need explaination
 
 #ifndef DISABLED
-    virtual auto set_popup() -> void {}
+    virtual auto set_tooltip() -> void {}
 #endif
 };
 
@@ -62,9 +62,9 @@ class Sale : protected Tab, public QFrame
     auto build_tool_bar(QFrame *parent) -> void;
 
 #ifdef DISABLED
-    auto set_popup() -> void;
+    auto set_tooltip() -> void;
 #else
-    auto set_popup() -> void override;
+    auto set_tooltip() -> void override;
 #endif
 
     QPointer<QVBoxLayout> header = nullptr;
