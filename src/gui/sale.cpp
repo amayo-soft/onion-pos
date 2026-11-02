@@ -1,6 +1,7 @@
 #include "tab.hpp"
 
 #include <QIcon>
+#include <qnamespace.h>
 
 Sale::Sale(QFrame *tab_parent) : QFrame(tab_parent) { build_tab(); }
 
@@ -36,20 +37,42 @@ auto Sale::set_layout() -> void
 
     /* TOOLBAR LAYOUTS -------------------------------------------------------------------------*/
     QPointer<QFrame> tool_bar_frame = new QFrame();
-    QPointer<QHBoxLayout> h_layout = new QHBoxLayout();
+    QPointer<QVBoxLayout> tool_bar_layout = new QVBoxLayout();
+    // anonimous space to set layout without care for same var names
+    {
+        QPointer<QHBoxLayout> h_layout = new QHBoxLayout();
+        QPointer<QHBoxLayout> h2_layout = new QHBoxLayout(); // second row
+        QPointer<QVBoxLayout> v_layout = new QVBoxLayout();
 
-    QPointer<QLabel> lbl = new QLabel("Codigo del Producto:");
-    lbl->setObjectName("lbl_code");
+        h_layout->setAlignment(Qt::AlignLeft);
+        h2_layout->setAlignment(Qt::AlignLeft);
 
-    h_layout->addWidget(lbl, 0, Qt::AlignLeft);
-    h_layout->addWidget(search);
+        QPointer<QLabel> lbl = new QLabel("Codigo del Producto:");
+        lbl->setObjectName("lbl_code");
 
-    tool_bar_frame->setLayout(h_layout);
-    /* END TOOLBAR LAYOUT ------------------------------------------------------------------*/
+        h_layout->addWidget(lbl);
+        h_layout->addWidget(search);
+
+        for (const auto &btn : tb_btn_list.get_button())
+        {
+            if (btn->objectName() == "search_btn")
+            {
+                h_layout->addWidget(btn);
+                continue;
+            }
+            h2_layout->addWidget(btn);
+        }
+
+        v_layout->addLayout(h2_layout);
+        tool_bar_layout->addLayout(h_layout);
+        tool_bar_layout->addLayout(v_layout);
+
+        tool_bar_frame->setLayout(tool_bar_layout);
+
+    } // END TOOLBAR LAYOUT ---------------------------------------------------------------- */
 
     /* TOOLBAR ADD WIDGET -----------------------------------------------------------------*/
     tool_bar->addWidget(tool_bar_frame);
-    tool_bar->addWidget(search_btn);
 
     /* END */
     header->addWidget(header_container);
@@ -84,5 +107,17 @@ auto Sale::set_button() -> void
     search_btn = new QPushButton(QIcon(":res/search.svg"), "Buscar");
     search_btn->setFixedWidth(150);
     search_btn->setObjectName("search_btn"); // Identifier for style
+    tb_btn_list.storage_button(search_btn);
+
+    // TOOLBAR SECOND ROW OF BUTTONS
+    art_various_btn = new QPushButton("Art. Varios");
+    art_various_btn->setFixedWidth(150);
+    art_various_btn->setProperty("tb", true); // group of buttons for style
+    tb_btn_list.storage_button(art_various_btn);
+
+    art_common_btn = new QPushButton("Art. Comun");
+    art_common_btn->setFixedWidth(150);
+    art_common_btn->setProperty("tb", true);
+    tb_btn_list.storage_button(art_common_btn);
 }
 auto Sale::set_binding() -> void {}

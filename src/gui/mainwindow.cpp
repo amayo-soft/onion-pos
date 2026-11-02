@@ -13,7 +13,7 @@ auto MainWindow::tab_info() -> std::array<TabInfo, 6>
                 .tab = new Sale(nullptr),
             },
             TabInfo{
-                .name = QString("Cliente"),
+                .name = QString("Clientes"),
                 .icon = QIcon(":res/client.svg"),
                 .tab = new Client(nullptr),
             },
@@ -61,6 +61,12 @@ auto MainWindow::build_tab_bar() -> void
         info.tab->setParent(tab_bar);
         tab_bar->addTab(info.tab, info.icon, info.name);
     }
+
+#ifdef DISABLED
+    // for now this will the tab that i not will enable
+    // work with in the future maybe
+    tab_bar->setTabEnabled(1, false);
+#endif
 
     tab_bar->setDocumentMode(true);
     tab_bar->tabBar()->setExpanding(true);

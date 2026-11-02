@@ -4,6 +4,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
+#include <QList>
 #include <QPointer>
 #include <QPushButton>
 #include <QToolBar>
@@ -18,6 +19,16 @@ class Product;
 class Configuration;
 class Report;
 
+namespace Widget
+{
+    struct Button
+    {
+        QList<QPointer<QPushButton>> button;
+        auto storage_button(QPushButton *btn) -> void { button.append(btn); }
+        [[nodiscard]] auto get_button() -> QList<QPointer<QPushButton>> { return button; }
+    };
+} // namespace Widget
+
 class Tab
 {
   public:
@@ -28,6 +39,10 @@ class Tab
     virtual auto set_layout() -> void = 0;  // Set the layout
     virtual auto set_binding() -> void = 0; // bind widget with their custom action
     virtual auto set_button() -> void = 0;  // no need explaination
+
+#ifndef DISABLED
+    virtual auto set_popup() -> void {}
+#endif
 };
 
 class Sale : protected Tab, public QFrame
@@ -46,15 +61,31 @@ class Sale : protected Tab, public QFrame
     auto build_search_bar() -> void;
     auto build_tool_bar(QFrame *parent) -> void;
 
+#ifdef DISABLED
+    auto set_popup() -> void;
+#else
+    auto set_popup() -> void override;
+#endif
+
     QPointer<QVBoxLayout> header = nullptr;
     QPointer<QVBoxLayout> center = nullptr;
     QPointer<QVBoxLayout> footer = nullptr;
     QPointer<QToolBar> tool_bar = nullptr;
 
+    Widget::Button tb_btn_list; // toolbar btn list
+
     /* Controls */
     QPointer<QLineEdit> search = nullptr;
 
+    // search by code, stay at the right of the search bar
     QPointer<QPushButton> search_btn = nullptr;
+    QPointer<QPushButton> art_various_btn = nullptr;
+    QPointer<QPushButton> art_common_btn = nullptr;     // common article button
+    QPointer<QPushButton> search_product_btn = nullptr; // open a new window with inventory
+    QPointer<QPushButton> wholesale_btn = nullptr;
+    QPointer<QPushButton> entry_btn = nullptr;      // money entry
+    QPointer<QPushButton> departures_btn = nullptr; // money departures
+    QPointer<QPushButton> delete_art_btn = nullptr; // delete article from the table
 };
 
 class Client : protected Tab, public QFrame
