@@ -45,8 +45,9 @@ auto Sale::set_layout() -> void
         QPointer<QVBoxLayout> v_layout = new QVBoxLayout();
 
         h_layout->setAlignment(Qt::AlignLeft);
-        h_layout->setSpacing(5);
+        h_layout->setSpacing(10);
         h2_layout->setAlignment(Qt::AlignLeft);
+        h2_layout->setSpacing(10);
 
         QPointer<QLabel> lbl = new QLabel("Codigo del Producto:");
         lbl->setObjectName("lbl_code");
@@ -114,25 +115,25 @@ auto Sale::set_button() -> void
     tb_btn_list.storage_button(search_btn);
 
     // TOOLBAR SECOND ROW OF BUTTONS
-    art_various_btn = new QPushButton("Art. Varios");
+    art_various_btn = new QPushButton(QIcon(":res/boxes.svg"), "Art. Varios");
     tb_btn_list.storage_button(art_various_btn);
 
-    art_common_btn = new QPushButton("Art. Comun");
+    art_common_btn = new QPushButton(QIcon(":res/list-plus.svg"), "Art. Comun");
     tb_btn_list.storage_button(art_common_btn);
 
     search_product_btn = new QPushButton(QIcon(":res/search.svg"), "[F3] / Buscar Producto");
     tb_btn_list.storage_button(search_product_btn);
 
-    wholesale_btn = new QPushButton("Mayoreo");
+    wholesale_btn = new QPushButton(QIcon(":res/wholesale.svg"), "Mayoreo");
     tb_btn_list.storage_button(wholesale_btn);
 
-    entry_btn = new QPushButton("Entrada");
+    entry_btn = new QPushButton(QIcon(":res/entry-arrow.svg"), "Entrada");
     tb_btn_list.storage_button(entry_btn);
 
-    departures_btn = new QPushButton("Salida");
+    departures_btn = new QPushButton(QIcon(":res/departure-arrow.svg"), "Salida");
     tb_btn_list.storage_button(departures_btn);
 
-    delete_art_btn = new QPushButton("[Del] / Borrar Producto");
+    delete_art_btn = new QPushButton(QIcon(":res/trash.svg"), "[Del] / Borrar");
     tb_btn_list.storage_button(delete_art_btn);
 
     for (const auto &btn : tb_btn_list.get_button())

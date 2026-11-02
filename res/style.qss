@@ -92,6 +92,7 @@ QPushButton[tb="true"] {
     padding: 5px 10px;
     font-weight: bold;
     min-height: 28px;
+    qproperty-iconSize: 24px;
 }
 
 /* Estado al pasar el cursor (Hover) */
@@ -119,6 +120,7 @@ QPushButton#search_btn {
     padding: 5px 12px;
     font-weight: bold;
     height: 25px;
+    qproperty-iconSize: 24px;
 }
 
 /* Estado al pasar el cursor (Hover) */
