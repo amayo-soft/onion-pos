@@ -32,6 +32,16 @@ file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS "include/*.hpp")
 
 add_executable(onion ${SOURCES} ${HEADERS} res.qrc)
 
+# USE FOR DISBALE PAR OF CODES
+target_compile_definitions(onion PRIVATE DISABLED)
+
+if(UNIX)
+  target_compile_definitions(onion PRIVATE TARGET_LINUX)
+elseif(WIN32)
+  target_compile_definitions(onion PRIVATE TARGET_WINDOWS
+                                            NOMINMAX)
+endif()
+
 target_include_directories(onion PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
 target_link_libraries(onion PRIVATE
