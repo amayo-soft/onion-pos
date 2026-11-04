@@ -1,0 +1,167 @@
+/* ESTE ARCHIVO ESTA GENERADO POR IA, NO SE ME DAN BIEN LOS ESTILOS */
+
+
+/* ==========================================================================
+   ESTILOS GENERALES Y VENTANA PRINCIPAL (ESTILO CLÁSICO POS)
+   ================================================================---------- */
+
+QMainWindow {
+    background-color: #d4d0c8; /* Gris clásico tradicional (Windows Classic / Motif) */
+}
+
+QToolBar {
+    background-color: #d4d0c8; /* Fondo gris neutro tradicional */
+    border-bottom: 1px solid #808080; /* Gris medio para linea divisoria */
+    padding: 6px;
+}
+
+/* ==========================================================================
+   ESTILOS PARA QTABWIDGET Y PESTAÑAS (QTABBAR)
+   ================================================================---------- */
+
+QTabWidget::pane {
+    border: 1px solid #707070; /* Borde clásico gris oscuro alrededor del panel */
+    background-color: #d4d0c8; /* Fondo gris clásico acorde a la ventana */
+    top: -1px; /* Ajuste fino para unir el borde con la pestaña seleccionada */
+}
+
+/* Estilo general de las pestañas */
+QTabBar::tab {
+    background-color: #e0e0e0; /* Gris claro neutro para pestañas inactivas */
+    color: #000000;            /* Texto negro para máxima legibilidad */
+    border: 1px solid #707070; /* Borde definido clásico */
+    border-bottom: none;       /* Sin borde inferior para que se fusione con el panel */
+    padding: 6px 14px;         /* Espacio interno (mejora el área para el icono y texto) */
+    margin-right: 2px;         /* Pequeña separación entre pestañas */
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    font-weight: normal;
+}
+
+/* Pestaña seleccionada (activa) */
+QTabBar::tab:selected {
+    background-color: #ffffff; /* Fondo blanco puro para destacar la pestaña activa */
+    color: #000080;            /* Texto azul marino clásico */
+    font-weight: bold;
+    border-color: #707070;
+}
+
+/* Pestaña al pasar el cursor (Hover) */
+QTabBar::tab:hover {
+    background-color: #ececec; /* Gris muy sutil al pasar el mouse */
+}
+
+/* Pestaña deshabilitada (si aplica) */
+QTabBar::tab:disabled {
+    background-color: #d4d0c8;
+    color: #808080;
+}
+
+QPushButton#add_ticket_btn {
+    background-color: #e0e0e0; /* Gris claro para alinearse con las pestañas inactivas */
+    color: #000080;            /* Azul marino clásico para destacar el símbolo '+' */
+    border: 1px solid #707070; /* Mismo borde que QTabBar::tab */
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 14px;
+    margin-left: 2px;          /* Separación sutil de la última pestaña */
+}
+
+/* Estado al pasar el cursor (Hover) */
+QPushButton#add_ticket_btn:hover {
+    background-color: #ffffff; /* Fondo blanco similar a la pestaña activa */
+    border-color: #000080;     /* Resalte en azul marino al pasar el mouse */
+    color: #005a9e;
+}
+
+/* Estado al presionar (Pressed) */
+QPushButton#add_ticket_btn:pressed {
+    background-color: #c8c8c8; /* Sensación táctil de hundido */
+    border-color: #404040;
+    color: #000000;
+}
+
+/* Estado deshabilitado (cuando se alcanza el límite de tickets) */
+QPushButton#add_ticket_btn:disabled {
+    background-color: #d4d0c8;
+    color: #808080;
+    border-color: #a0a0a0;
+}
+
+
+/* ==========================================================================
+   ETIQUETAS Y CAMPOS DE TEXTO
+   ================================================================---------- */
+
+QLabel#lbl_code {
+    color: #000080; /* Azul marino clásico de alto contraste */
+    font-weight: bold;
+}
+
+QLineEdit {
+    background-color: #ffffff; /* Blanco puro para fondo de entrada */
+    color: #000000;            /* Texto negro puro de máxima legibilidad */
+    border: 2px solid #7f9db9; /* Azul grisáceo clásico de borde de campo */
+    border-radius: 2px;        /* Esquinas casi rectas (estilo tradicional) */
+    padding: 4px 6px;
+    selection-background-color: #0a246a; /* Azul oscuro clásico de selección */
+    selection-color: #ffffff;            /* Texto blanco en selección */
+}
+
+QLineEdit:focus {
+    border-color: #000080; /* Azul marino para indicar foco activo */
+}
+
+/* ==========================================================================
+   BOTONES SECUNDARIOS DE LA BARRA DE HERRAMIENTAS [tb="true"]
+   ================================================================---------- */
+
+QPushButton[tb="true"] {
+    background-color: #e0e0e0; /* Gris claro neutro clásico */
+    color: #000000;            /* Texto negro estándar */
+    border: 1px solid #707070; /* Borde gris oscuro bien definido */
+    border-radius: 3px;        /* Bordes ligeramente biselados */
+    padding: 5px 10px;
+    font-weight: bold;
+    min-height: 28px;
+    qproperty-iconSize: 24px;
+}
+
+/* Estado al pasar el cursor (Hover) */
+QPushButton[tb="true"]:hover {
+    background-color: #ececec; /* Gris muy claro al pasar el mouse */
+    border-color: #404040;     /* Borde gris más oscuro */
+    color: #000000;            /* Mantiene texto negro */
+}
+
+/* Estado al presionar (Pressed) */
+QPushButton[tb="true"]:pressed {
+    background-color: #c8c8c8; /* Gris medio para simular hendidura/presión */
+    border-color: #303030;     /* Borde casi negro al presionar */
+}
+
+/* ==========================================================================
+   BOTÓN PRINCIPAL DE BÚSQUEDA (#search_btn)
+   ================================================================---------- */
+
+QPushButton#search_btn {
+    background-color: #005a9e; /* Azul clásico corporativo (destacado) */
+    color: #ffffff;            /* Texto blanco puro */
+    border: 1px solid #003966; /* Azul muy oscuro para el borde */
+    border-radius: 3px;        /* Borde biselado clásico */
+    padding: 5px 12px;
+    font-weight: bold;
+    height: 25px;
+    qproperty-iconSize: 24px;
+}
+
+/* Estado al pasar el cursor (Hover) */
+QPushButton#search_btn:hover {
+    background-color: #0078d4; /* Azul un poco más claro al enfocar */
+    border-color: #004578;     /* Borde azul oscuro equilibrado */
+}
+
+/* Estado al presionar (Pressed) */
+QPushButton#search_btn:pressed {
+    background-color: #004578; /* Azul oscuro profundo al presionar */
+}
