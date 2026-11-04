@@ -11,70 +11,12 @@ auto Sale::build_tab() -> void
 {
     main_layout = new QVBoxLayout(this);
 
-    set_layout();
-    set_binding();
+    build_tool_bar(main_layout);
+    build_ticket(main_layout);
     set_tooltip();
+    set_binding();
+
     this->setLayout(main_layout);
-}
-
-auto Sale::set_layout() -> void
-{
-    QPointer<QFrame> main = new QFrame();
-    QPointer<QVBoxLayout> m_layout = new QVBoxLayout();
-
-    build_tool_bar(m_layout);
-    build_search_bar();
-    set_button();
-    build_ticket(m_layout);
-
-    /* TOOLBAR LAYOUTS -------------------------------------------------------------------------*/
-    QPointer<QFrame> tool_bar_frame = new QFrame();
-    QPointer<QVBoxLayout> tool_bar_layout = new QVBoxLayout();
-    // anonimous space to set layout without care for same var names
-    {
-        QPointer<QHBoxLayout> h_layout = new QHBoxLayout();  // first row
-        QPointer<QHBoxLayout> h2_layout = new QHBoxLayout(); // second row
-        QPointer<QVBoxLayout> v_layout = new QVBoxLayout();
-
-        h_layout->setAlignment(Qt::AlignLeft);
-        h_layout->setSpacing(10);
-        h2_layout->setAlignment(Qt::AlignLeft);
-        h2_layout->setSpacing(10);
-
-        QPointer<QLabel> lbl = new QLabel("Codigo del Producto:");
-        lbl->setObjectName("lbl_code");
-
-        h_layout->addWidget(lbl);
-        h_layout->addWidget(search);
-
-        for (const auto &btn : tb_btn_list.get_button())
-        {
-            if (btn->objectName() == "search_btn")
-            {
-                h_layout->addWidget(btn);
-                continue;
-            }
-            h2_layout->addWidget(btn);
-        }
-
-        h_layout->addStretch();
-        h2_layout->addStretch();
-
-        v_layout->addLayout(h2_layout);
-        tool_bar_layout->addLayout(h_layout);
-        tool_bar_layout->addLayout(v_layout);
-
-        tool_bar_frame->setLayout(tool_bar_layout);
-
-    } // END TOOLBAR LAYOUT ---------------------------------------------------------------- */
-
-    /* TOOLBAR ADD WIDGET -----------------------------------------------------------------*/
-    tool_bar->addWidget(tool_bar_frame);
-
-    /* END */
-
-    main->setLayout(m_layout);
-    main_layout->addWidget(main);
 }
 
 auto Sale::build_tool_bar(QVBoxLayout *parent) -> void
@@ -84,6 +26,46 @@ auto Sale::build_tool_bar(QVBoxLayout *parent) -> void
 
     tool_bar = new QToolBar();
     tool_bar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    build_search_bar();
+    set_tb_button();
+
+    QPointer<QFrame> tool_bar_frame = new QFrame();
+    QPointer<QVBoxLayout> tool_bar_layout = new QVBoxLayout();
+    QPointer<QHBoxLayout> h_layout = new QHBoxLayout();  // first row
+    QPointer<QHBoxLayout> h2_layout = new QHBoxLayout(); // second row
+    QPointer<QVBoxLayout> v_layout = new QVBoxLayout();
+
+    h_layout->setAlignment(Qt::AlignLeft);
+    h_layout->setSpacing(10);
+    h2_layout->setAlignment(Qt::AlignLeft);
+    h2_layout->setSpacing(10);
+
+    QPointer<QLabel> lbl = new QLabel("Codigo del Producto:");
+    lbl->setObjectName("lbl_code");
+
+    h_layout->addWidget(lbl);
+    h_layout->addWidget(search);
+
+    for (const auto &btn : tb_btn_list.get_button())
+    {
+        if (btn->objectName() == "search_btn")
+        {
+            h_layout->addWidget(btn);
+            continue;
+        }
+        h2_layout->addWidget(btn);
+    }
+
+    h_layout->addStretch();
+    h2_layout->addStretch();
+
+    v_layout->addLayout(h2_layout);
+    tool_bar_layout->addLayout(h_layout);
+    tool_bar_layout->addLayout(v_layout);
+
+    tool_bar_frame->setLayout(tool_bar_layout);
+
+    tool_bar->addWidget(tool_bar_frame);
     parent->addWidget(tool_bar);
 }
 
@@ -152,10 +134,8 @@ auto Sale::build_search_bar() -> void
     search->setFixedSize(600, 35);
 }
 
-auto Sale::set_button() -> void
+auto Sale::set_tb_button() -> void
 {
-    if (!tool_bar)
-        return;
 
     search_btn = new QPushButton(QIcon(":res/search.svg"), "Buscar");
     search_btn->setFixedWidth(100);

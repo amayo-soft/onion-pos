@@ -37,9 +37,7 @@ class Tab
 
   protected:
     virtual auto build_tab() -> void = 0;
-    virtual auto set_layout() -> void = 0;  // Set the layout
     virtual auto set_binding() -> void = 0; // bind widget with their custom action
-    virtual auto set_button() -> void = 0;  // no need explaination
 
 #ifndef DISABLED
     virtual auto set_tooltip() -> void {}
@@ -55,13 +53,12 @@ class Sale : protected Tab, public QFrame
 
   protected:
     auto build_tab() -> void override;
-    auto set_layout() -> void override;
     auto set_binding() -> void override;
-    auto set_button() -> void override;
 
   private:
     auto build_search_bar() -> void;
     auto build_tool_bar(QVBoxLayout *parent) -> void;
+    auto set_tb_button() -> void; // set ToolBar buttons
     auto build_ticket(QVBoxLayout *parent) -> void;
     auto add_ticket() -> void;
     auto delete_ticket(int index) -> void;
@@ -101,9 +98,7 @@ class Client : protected Tab, public QFrame
 
   protected:
     auto build_tab() -> void override;
-    auto set_layout() -> void override;
     auto set_binding() -> void override;
-    auto set_button() -> void override;
 };
 
 class Inventory : protected Tab, public QFrame
@@ -114,9 +109,7 @@ class Inventory : protected Tab, public QFrame
 
   protected:
     auto build_tab() -> void override;
-    auto set_layout() -> void override;
     auto set_binding() -> void override;
-    auto set_button() -> void override;
 };
 
 class Product : protected Tab, public QFrame
@@ -127,9 +120,7 @@ class Product : protected Tab, public QFrame
 
   protected:
     auto build_tab() -> void override;
-    auto set_layout() -> void override;
     auto set_binding() -> void override;
-    auto set_button() -> void override;
 };
 
 class Report : protected Tab, public QFrame
@@ -140,9 +131,7 @@ class Report : protected Tab, public QFrame
 
   protected:
     auto build_tab() -> void override;
-    auto set_layout() -> void override;
     auto set_binding() -> void override;
-    auto set_button() -> void override;
 };
 
 class Configuration : protected Tab, public QFrame
@@ -153,7 +142,5 @@ class Configuration : protected Tab, public QFrame
 
   protected:
     auto build_tab() -> void override;
-    auto set_layout() -> void override;
     auto set_binding() -> void override;
-    auto set_button() -> void override;
 };
