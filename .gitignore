@@ -3,3 +3,4 @@ out/
 *.so
 *.sa
 *.lib
+compile_commands.json
