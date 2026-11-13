@@ -1,0 +1,7 @@
+<RCC>
+  <qresource lang="iconos" prefix="icons"/>
+  <qresource prefix="/">
+    <file>icon.png</file>
+  </qresource>
+  <qresource lang="estilos" prefix="styles"/>
+</RCC>
