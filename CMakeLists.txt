@@ -18,20 +18,27 @@ find_package(Qt6 COMPONENTS Widgets Gui Core REQUIRED)
 
 qt_standard_project_setup()
 
+# .ui files paths, make the life better; thanks cmake
+set(CMAKE_AUTOUIC_SEARCH_PATHS
+      "${CMAKE_CURRENT_SOURCE_DIR}/onion-qt/"
+      "${CMAKE_CURRENT_SOURCE_DIR}/onion-qt/sale/"
+)
+
+# All Resource Files Goes Here
 file(GLOB_RECURSE RESOURCE CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/onion-qt/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/onion-qt/*.hpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/onion-qt/*.h"
-    "${CMAKE_CURRENT_SOURCE_DIR}/onion-qt/*.ui"
+    "${CMAKE_CURRENT_SOURCE_DIR}/onion-qt/sale/*.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/onion-qt/sale/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/core/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/core/*.hpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/core/*.h"
 )
 add_executable(${PROJECT_NAME}
             ${RESOURCE}
             res.qrc
 )
 
+# Optimze Compilation Time
 target_precompile_headers(${PROJECT_NAME} INTERFACE
                           QtWidgets.h QtCore.h QtGui.h
 )
